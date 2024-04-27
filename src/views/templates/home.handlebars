@@ -1,0 +1,16 @@
+<h1>Productos</h1>
+
+{{#if mostrarProductos}}
+{{#each productos}}
+<div>
+    <p>Titulo: {{this.title}}</p>
+    <p>Descripcion: {{this.descripcion}}</p>
+    <p>Precio: {{this.price}}</p>
+    <p>Stock: {{this.stock}}</p>
+
+    <img src="../../public/img/170899824248166585_7797470128152.jpg" alt="Imagen de {{this.title}}">
+</div>
+{{/each}}
+{{else}}
+<p>No se pueden mostrar los productos</p>
+{{/if}}
