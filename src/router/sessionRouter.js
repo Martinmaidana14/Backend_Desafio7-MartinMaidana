@@ -24,7 +24,6 @@ sessionRouter.get('/login', passport.authenticate('login'), async (req, res) => 
 
 sessionRouter.post('/register', passport.authenticate('register'), async (req, res) => {
     try {
-        console.log(req)
         if (!req.user) {
             return res.status(400).send("Usuario ya existente en la aplicacion")
         }
@@ -34,6 +33,17 @@ sessionRouter.post('/register', passport.authenticate('register'), async (req, r
     } catch (e) {
         res.status(500).send("Error al registrar usuario")
     }
+})
+
+sessionRouter.get('/github', passport.authenticate('github', { scope: ['user:email'] }), async (req, res) => { r })
+
+sessionRouter.get('/githubSession', passport.authenticate('github'), async (req, res) => {
+    console.log(req)
+    req.session.user = {
+        email: req.user.email,
+        first_name: req.user.name
+    }
+    res.redirect('/')
 })
 
 sessionRouter.get('/logout', (req, res) => {
@@ -46,6 +56,5 @@ sessionRouter.get('/logout', (req, res) => {
 
     })
 })
-
 
 export default sessionRouter
